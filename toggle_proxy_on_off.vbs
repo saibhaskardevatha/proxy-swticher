@@ -2,7 +2,7 @@ Option Explicit
 
 'Variables & Constants:
 Dim ProxySettings_path, VbsScript_filename 
-ProxySettings_path = "C:\Users\Sai Bhaskar\proxy-switcher"
+ProxySettings_path = "C:\Users\Sai Bhaskar\proxy-switcher" 'Change this line according to your location.
 VbsScript_filename = "toggle_proxy_on_off.vbs"
 Const MESSAGE_BOX_TIMEOUT = 1 'sec; change this value to set how long the message box displays when you toggle the proxy setting 
 Const PROXY_OFF = 0
@@ -44,7 +44,7 @@ End Sub
 Sub CreateOrUpdateDesktopShortcut(onOrOff)
   'create a shortcut 
   Dim shortcut, iconStr
-  Set shortcut = WSHShell.CreateShortcut("C:\Users\" + username + "\Desktop\Proxy On-Off.lnk")
+  Set shortcut = WSHShell.CreateShortcut("C:\Users\" + username + "\Desktop\Proxy.lnk")
   'Set the target path (target file) to run when the shortcut is clicked 
   shortcut.TargetPath = ProxySettings_path + "\" + VbsScript_filename
   'Set the working directory. This is necessary in case you ever make this shortcut call a batch (.bat) file, for instance, which in turn calls a .vbs script. In order to know where the .vbs script file/command is located, the shortcut must be operating in the working directory where the .vbs scripts are located. Otherwise, calls to the .vbs scripts from a .bat file this shortcut points to, for instance, won't work since their directories are not in the Windows %PATH% variable, and you'll get an error which states: "'name_of_vbs_script_file' is not recognized as an internal or external command, operable program or batch file."
@@ -55,7 +55,7 @@ Sub CreateOrUpdateDesktopShortcut(onOrOff)
   ElseIf onOrOff = "off" Then
     iconStr = "off.ico"
   End If 
-  shortcut.IconLocation = ProxySettings_path + "\Icons\" + iconStr
+  shortcut.IconLocation = ProxySettings_path + iconStr
   'Save the shortcut 
   shortcut.Save
 End Sub 
